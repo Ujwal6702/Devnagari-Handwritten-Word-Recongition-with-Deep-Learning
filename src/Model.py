@@ -72,10 +72,10 @@ class Model:
 
 		# basic cells which is used to build RNN
 		numHidden = 256
-		cells = [tf.estimator.rnn.LSTMCell(num_units=numHidden, state_is_tuple=True) for _ in range(2)] # 2 layers
+		cells = [tf.keras.layers.LSTMCell(units=numHidden) for _ in range(2)]  # 2 layers
 
 		# stack basic cells
-		stacked = tf.estimator.rnn.MultiRNNCell(cells, state_is_tuple=True)
+		stacked = tf.keras.layers.StackedRNNCells(cells)
 
 		# bidirectional RNN
 		# BxTxF -> BxTx2H
